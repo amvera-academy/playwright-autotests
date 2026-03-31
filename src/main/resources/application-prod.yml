@@ -1,0 +1,7 @@
+amvera:
+  # Spring ищет AMVERA_USERNAME в переменных окружения
+  username: ${AMVERA_USERNAME_PROD}
+  # Spring ищет AMVERA_PASSWORD в переменных окружения
+  password: ${AMVERA_PASSWORD_PROD}
+  # HOST - для прода https://cloud.amvera.ru для препрода https://cloud-preprod.msk1.amvera.tech/
+  host: ${AMVERA_HOST_PROD}

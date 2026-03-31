@@ -1,0 +1,18 @@
+<div th:fragment="task-list" id="task-updates" class="log-container">
+    <ul style="list-style: none; padding: 0; margin: 0;">
+        <li th:each="row : ${logRows}" style="margin-bottom: 5px; font-family: monospace;">
+
+            <span th:if="${row.status != null}"
+                  th:text="'[' + ${row.status} + '] '"
+                  style="color: #bcbcbc;">
+            </span>
+
+            <a th:href="@{/view-log(name=${row.fileName})}"
+               th:text="${row.fileName}"
+               style="color: #4daafc; text-decoration: none;">
+            </a>
+
+        </li>
+        <li th:if="${#lists.isEmpty(logRows)}" style="color: #888;">Логов пока нет</li>
+    </ul>
+</div>

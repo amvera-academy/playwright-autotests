@@ -1,0 +1,28 @@
+logging:
+  level:
+    root: info
+#    org.springframework.web: DEBUG
+    #    org.hibernate.SQL: DEBUG
+#    org.hibernate.SQL: info
+#    org.mapstruct: DEBUG
+  pattern:
+    #    console: " %highlight(%-5level) %msg - %-36logger{36} [%X{traceId}:%X{spanId}]%n"
+    console: "%d{HH:mm:ss} %highlight(%-4level) %-50msg - %-15logger{15}%n"
+
+amvera:
+  # Имя из пути тестового проекта
+  test-project-name: ${TEST_PROJECT_NAME:privet}
+  # Запуск в облаке?
+  isAmvera: ${IS_AMVERA:true}
+
+playwright:
+  headed: ${PLAYWRIGHT_HEADED:false}
+
+server:
+  #  Включаем грациозное завершение
+  shutdown: graceful
+
+spring:
+  lifecycle:
+    #  Сколько времени ждать завершения активных задач перед принудительным выходом
+    timeout-per-shutdown-phase: 30s

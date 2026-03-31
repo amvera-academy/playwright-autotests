@@ -1,0 +1,17 @@
+---
+version: null
+meta:
+  environment: python
+  toolchain:
+    name: pip
+    version: 3.11
+build:
+  requirementsPath: missing-requirements.txt
+  useCache: true
+  var: errorenv
+run:
+  scriptName: app.py
+  command: null
+  persistenceMount: /data
+  containerPort: 80
+serviceType: compute

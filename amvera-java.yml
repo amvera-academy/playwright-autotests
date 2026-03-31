@@ -1,0 +1,17 @@
+version: null
+meta:
+  environment: jvm
+  toolchain:
+    name: gradle
+    version: "21"
+build:
+  image: null
+  args: installPlaywright assemble
+  artifacts:
+    build/libs/*: /
+run:
+  image: null
+  jarName: checkDeployFlow-1.0-SNAPSHOT.jar
+  persistenceMount: /data
+  containerPort: "80"
+serviceType: compute

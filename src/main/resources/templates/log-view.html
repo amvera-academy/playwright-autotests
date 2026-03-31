@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Просмотр лога</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+        .log-content {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            min-height: 200px;
+        }
+        .back-link { margin-bottom: 20px; display: inline-block; color: #007bff; }
+    </style>
+</head>
+<body>
+
+<a href="/" class="back-link">← Назад к списку</a>
+
+<h2 th:text="'Лог: ' + ${fileName}"></h2>
+
+<div th:if="${error}" style="color: red;" th:text="${error}"></div>
+
+<div class="log-content"
+     th:if="${content}"
+     id="log-display"
+     th:attr="hx-get=@{/view-log-content(name=${fileName})}"
+     hx-trigger="every 10s"
+     hx-swap="innerHTML">
+
+    <div th:fragment="log-body" style="display: block;">
+        <div th:each="line : ${content}" th:text="${line}"></div>
+        <div th:if="${#lists.isEmpty(content)}" style="color: #666;">Ожидание записей...</div>
+    </div>
+</div>
+
+<a href="/" class="back-link" style="margin-top: 20px;">← Назад к списку</a>
+
+</body>
+</html>

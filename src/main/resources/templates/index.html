@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Amvera Check Deploy</title>
+    <style>
+        .log-container { background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 5px; font-family: monospace; }
+        .success { color: green; }
+        .error { color: red; }
+        button { padding: 10px 20px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px; }
+        button:hover { background: #0056b3; }
+        /* Добавим стиль для ссылки, чтобы она была заметной */
+        .info-link { display: inline-block; margin-top: 10px; color: #007bff; text-decoration: none; font-size: 0.9em; }
+        .info-link:hover { text-decoration: underline; }
+    </style>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+
+<body>
+<h1>Запустить тест</h1>
+
+<div th:if="${message}" class="success">
+    <p th:text="${message}"></p>
+</div>
+<div th:if="${error}" class="error">
+    <p th:text="${error}"></p>
+</div>
+
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;">
+    <div th:each="flow : ${availableFlows}">
+        <form th:action="@{/run-flow}" method="post">
+            <input type="hidden" name="flowName" th:value="${flow.name}">
+            <button type="submit" th:text="'' + ${flow.name}"></button>
+        </form>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <a class="info-link"
+       href="https://docs.google.com/spreadsheets/d/1fmXAKyUqd8_S9WhXKyXolVvKjLZwbo_GGvrJyMsWeQ8/edit?usp=sharing"
+       target="_blank">
+        📊 Посмотреть описание шагов флоу (Google Sheets)
+    </a>
+</div>
+
+<hr>
+<h3>Итоги запусков тестов:</h3>
+<div id="task-updates"
+     hx-get="/task-status"
+     hx-trigger="load, every 10s">
+    Загрузка статусов...
+</div>
+
+</body>
+</html>
